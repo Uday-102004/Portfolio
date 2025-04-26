@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Uday Kumar | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body onload="initializeSite()">
+
+  <div class="video-background">
+    <video autoplay muted loop id="background-video">
+      <source src="video.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <header>
+    <h1>Uday Kumar</h1>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <nav id="navbar">
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#projects" onclick="closeMenu()">Projects</a>
+      <a href="#resume" onclick="closeMenu()">Resume</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home">
+    <div class="profile-container">
+      <div class="profile-image-container">
+        <img src="profile.jpg" alt="Uday Kumar Photo" class="profile-img" />
+      </div>
+      <div class="social-icons">
+        <a href="https://github.com/Uday-102004" target="_blank">
+          <img src="github.jpg" alt="GitHub" class="social-icon" />
+        </a>
+        <a href="https://www.linkedin.com/in/uday-kumar-610832328/" target="_blank">
+          <img src="linkedin.jpg" alt="LinkedIn" class="social-icon" />
+        </a>
+      </div>
+    </div>
+    <h2 id="greeting">Hi, I'm Uday!</h2>
+    <p id="description">Hi, I'm Uday!
+      I'm a B.Tech CSE student who enjoys working with data and building websites. I like learning new tools and applying them to real-world projects..</p>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <ul>
+    <p><li>Currently pursuing B.Tech in Computer Science at GITAM University.<br></li>
+
+      <li>Strong interest in <b>data analytics</b> and <b>web development.</b><br></li>
+      
+      <li>Completed an internship at <b>Infosys Springboard,</b> gaining hands-on experience in real-world software projects.<br></li>
+      
+      <li>Learning and practicing <b>Python, SQL,</b> and <b>Power BI</b> for data analysis.<br></li>
+      
+      <li>Building web projects using <b>HTML, CSS,</b> and <b>GitHub.</b><br></li>
+    </ul>
+
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-section">
+      <ul>
+        <li><b>Programming Languages:</b> Python, SQL, Excel</li>
+        <li><b>Libraries/Tools:</b> NumPy, Pandas, Matplotlib</li>
+        <li><b>Web Technologies:</b> HTML, CSS, GitHub</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>Budget Tracker:</strong> A web app to manage income, expenses, and budgets.
+        <br><a href="Certificate_Budget_Tracker.pdf" download onclick="showDownloadMessage('Budget Tracker')">Download Certificate</a>
+      </li>
+      
+    </ul>
+  </section>
+    <!-- Certificates Section -->
+    <section id="certificates">
+      <h2>Certificates / Achievements</h2>
+      <ul class="certificate-list">
+        <li><a href="Programming_Fundamentals_Python.pdf" download onclick="showCertificateDownload('Programming Fundamentals using Python - Part 1')">1. Programming Fundamentals using Python - Part 1</a></li>
+        <li><a href="DBMS_Part_1.pdf" download onclick="showCertificateDownload('Database Management System Part - 1')">2. Database Management System Part - 1</a></li>
+        <li><a href="Python_Foundation_Certificate.pdf" download onclick="showCertificateDownload('Python Foundation Certificate')">3. Python Foundation Certificate</a></li>
+      </ul>
+    </section>
+
+  <section id="resume">
+    <h2>Resume</h2>
+    <a href="Uday_Resume.pdf" download>Download My Resume</a>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="formResponse"></p>
+  </section>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Uday Kumar. All rights reserved.</p>
+  </footer>
+
+  <button onclick="scrollToTop()" id="scrollBtn" title="Go to top">↑</button>
+
+  <script>
+    function initializeSite() {
+      revealSections();
+      const hour = new Date().getHours();
+      let greeting = "Welcome!";
+      if (hour < 12) greeting = "Good Morning 🌅";
+      else if (hour < 18) greeting = "Good Afternoon ☀️";
+      else greeting = "Good Evening 🌙";
+      alert(greeting + ", thanks for visiting my portfolio!");
+      document.getElementById("year").textContent = new Date().getFullYear();
+    }
+
+    function revealSections() {
+      const sections = document.querySelectorAll('section');
+      sections.forEach((sec, i) => {
+        sec.style.animation = `fadeInUp 1s ease ${i * 0.4}s forwards`;
+      });
+    }
+
+    function toggleMenu() {
+      document.getElementById("navbar").classList.toggle("show");
+    }
+
+    function closeMenu() {
+      document.getElementById("navbar").classList.remove("show");
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.onscroll = function () {
+      const btn = document.getElementById("scrollBtn");
+      btn.style.display = window.scrollY > 300 ? "block" : "none";
+    }
+
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const message = document.getElementById("message").value;
+      document.getElementById("formResponse").textContent = `Thanks, ${name}! I’ve received your message: "${message}".`;
+      this.reset();
+    });
+
+    function showDownloadMessage() {
+      alert("Your certificate is being downloaded. Great job on the Budget Tracker project!");
+    }
+  </script>
+</body>
+</html>
